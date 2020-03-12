@@ -8,8 +8,8 @@
   "dependencies": {
     "@mdi/js": "5.0.45",
     "airtable": "0.8.1",
-    "gridsome": "^0.5.0",
-    "sass-loader": "8.0.2",
+    "gridsome": "^0.7.13",
+    "vue-the-mask": "^0.11.1",
     "vue2-google-maps": "0.10.7",
     "vuetify": "2.2.17"
   },
