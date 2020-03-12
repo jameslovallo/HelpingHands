@@ -176,6 +176,7 @@
 				clickableIcons: false,
 				maxZoom: 14,
 				minZoom: 11,
+				gestureHandling: "greedy",
 				styles: mapStyles
 			}
 		}),
