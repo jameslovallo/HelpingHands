@@ -7,6 +7,10 @@
 			<v-spacer />
 			<v-btn to="/" text>Home</v-btn>
 			<v-btn to="/app/" text>App</v-btn>
+			<g-link
+				to="/app/"
+				style="height: 0; width: 0; visibility: hidden; pointer-events: none;"
+			/>
 			<v-btn to="/about/" text>About</v-btn>
 			<v-spacer class="hidden-sm-and-up" />
 		</v-app-bar>

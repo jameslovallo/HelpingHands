@@ -32,7 +32,7 @@
 					class="px-6 deep-purple lighten-5"
 				>
 					<v-icon left>{{ icons.mdiHandLeft }}</v-icon>
-					I need help!
+					I need help
 				</v-btn>
 				<v-btn
 					value="can_help"
@@ -41,7 +41,7 @@
 					class="px-6 deep-purple lighten-5"
 				>
 					<v-icon left>{{ icons.mdiHandHeart }}</v-icon>
-					I can help!
+					I can help
 				</v-btn>
 			</v-btn-toggle>
 		</div>
