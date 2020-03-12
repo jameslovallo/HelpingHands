@@ -6,7 +6,7 @@
 				:key="n"
 				:marker="hood.point"
 			>
-				<v-tooltip top color="primary">
+				<v-tooltip top color="primary" :activate-on-click="false">
 					<template v-slot:activator="{ on }">
 						<button @click="setHood(hood)" v-on="on" class="marker">
 							<div class="marker-dot"></div>
