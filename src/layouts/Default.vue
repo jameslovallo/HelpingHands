@@ -8,6 +8,7 @@
 			<v-btn to="/" text>Home</v-btn>
 			<v-btn to="/app/" text>App</v-btn>
 			<v-btn to="/about/" text>About</v-btn>
+			<v-spacer class="xs-only" />
 		</v-app-bar>
 
 		<v-content>
@@ -45,5 +46,11 @@
 	h3,
 	.h3 {
 		font-size: calc(34px + (48 - 34) * ((100vw - 400px) / (1800 - 400)));
+	}
+
+	p,
+	ol,
+	ul {
+		font-size: calc(16px + (18 - 16) * ((100vw - 400px) / (1800 - 400)));
 	}
 </style>
