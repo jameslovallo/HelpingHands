@@ -1,23 +1,32 @@
 <template>
 	<Layout>
-		<GmapMap :center="center" :zoom="12" class="map" :options="options">
-			<gmap-custom-marker
-				v-for="(hood, n) in hoods"
-				:key="n"
-				:marker="hood.point"
+		<v-lazy>
+			<GmapMap
+				v-if="!submitted"
+				:center="center"
+				:zoom="12"
+				class="map"
+				:options="options"
 			>
-				<v-tooltip top color="primary" :activate-on-click="false">
-					<template v-slot:activator="{ on }">
-						<button @click="setHood(hood)" v-on="on" class="marker">
-							<div class="marker-dot"></div>
-						</button>
-					</template>
-					<span>{{ hood.neighborhood }}</span>
-				</v-tooltip>
-			</gmap-custom-marker>
-		</GmapMap>
+				<gmap-custom-marker
+					v-for="(hood, n) in hoods"
+					:key="n"
+					:marker="hood.point"
+				>
+					<v-tooltip top color="primary" :activate-on-click="false">
+						<template v-slot:activator="{ on }">
+							<button @click="setHood(hood)" v-on="on" class="marker">
+								<div class="marker-dot"></div>
+							</button>
+						</template>
+						<span>{{ hood.neighborhood }}</span>
+					</v-tooltip>
+				</gmap-custom-marker>
+			</GmapMap>
+		</v-lazy>
 
-		<div class="toggle">
+		<v-toolbar v-if="!submitted" flat color="transparent" class="mt-4">
+			<v-spacer />
 			<v-btn-toggle
 				rounded
 				mandatory
@@ -44,7 +53,8 @@
 					I can help
 				</v-btn>
 			</v-btn-toggle>
-		</div>
+			<v-spacer />
+		</v-toolbar>
 
 		<v-container
 			v-if="!submitted"
@@ -80,8 +90,11 @@
 					required
 					type="tel"
 					v-mask="'(###) ###-####'"
-					hint="10-Digit, U.S. Phone Number"
-					placeholder="(###) ###-####"
+					hint="10-digit U.S. phone number • (###) ###-####"
+					:rules="[
+						v => !!v || 'Phone number is required',
+						v => v.length === 14 || 'Phone number must be valid'
+					]"
 				/>
 				<v-text-field
 					label="Email Address"
@@ -120,7 +133,7 @@
 			</v-form>
 		</v-container>
 
-		<v-container v-if="submitted" class="d-flex justify-center mb-12 mt-6">
+		<v-container v-if="submitted" class="d-flex justify-center my-12">
 			<v-card shaped outlined style="min-width: 300px; max-width: 600px;">
 				<v-img src="/message_sent.svg" contain class="ma-4" />
 				<v-divider />

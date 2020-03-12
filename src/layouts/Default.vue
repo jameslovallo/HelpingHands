@@ -30,11 +30,14 @@
 </script>
 
 <style>
+	@import url("https://fonts.googleapis.com/css2?family=Pragati+Narrow:wght@700&display=swap");
+
 	h1,
 	h2,
 	h3 {
 		margin-bottom: 1rem;
 		line-height: 1.25em;
+		font-family: "Pragati Narrow", Roboto, sans-serif;
 	}
 
 	h1,
