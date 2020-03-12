@@ -5,6 +5,5 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-	siteName: 'Helping Hands, NYC',
-	plugins: []
+	siteName: 'Helping Hands, NYC'
 }

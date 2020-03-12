@@ -1,17 +1,20 @@
 <template>
 	<Layout>
-		<GmapMap
-			:center="{ lat: 40.782792, lng: -73.965881 }"
-			:zoom="12"
-			class="map"
-		>
-			<GmapMarker
+		<GmapMap :center="center" :zoom="12" class="map" :options="options">
+			<gmap-custom-marker
 				v-for="(hood, n) in hoods"
 				:key="n"
-				:position="hood.point"
-				:clickable="true"
-				@click="setHood(hood)"
-			/>
+				:marker="hood.point"
+			>
+				<v-tooltip top color="primary">
+					<template v-slot:activator="{ on }">
+						<button @click="setHood(hood)" v-on="on" class="marker">
+							<div class="marker-dot"></div>
+						</button>
+					</template>
+					<span>{{ hood.neighborhood }}</span>
+				</v-tooltip>
+			</gmap-custom-marker>
 		</GmapMap>
 
 		<div class="toggle">
@@ -51,9 +54,9 @@
 			<div class="title mb-4 text-center">
 				<span v-if="selectedNeighborhood">
 					Your Location:
-					<span class="primary--text">
+					<b class="primary--text">
 						{{ selectedNeighborhood }}, {{ selectedBurrough }}
-					</span>
+					</b>
 				</span>
 				<span v-else>Select your neighborhood on the map.</span>
 			</div>
@@ -132,6 +135,8 @@
 
 <script>
 	import { hoods } from "./hoods";
+	import { mapStyles } from "./mapStyles";
+	import GmapCustomMarker from "vue2-gmap-custom-marker";
 	import {
 		mdiSend,
 		mdiAccount,
@@ -142,7 +147,11 @@
 		mdiHandHeart
 	} from "@mdi/js";
 	export default {
+		components: {
+			"gmap-custom-marker": GmapCustomMarker
+		},
 		data: () => ({
+			center: { lat: 40.782792, lng: -73.965881 },
 			valid: false,
 			hoods: hoods,
 			selectedNeighborhood: "",
@@ -160,12 +169,21 @@
 				mdiInformationOutline,
 				mdiHandLeft,
 				mdiHandHeart
+			},
+			options: {
+				streetViewControl: false,
+				mapTypeControl: false,
+				clickableIcons: false,
+				maxZoom: 14,
+				minZoom: 11,
+				styles: mapStyles
 			}
 		}),
 		methods: {
 			setHood(hood) {
 				this.selectedNeighborhood = hood.neighborhood;
 				this.selectedBurrough = hood.burrough;
+				this.center = hood.point;
 			},
 			submit() {
 				var Airtable = require("airtable");
@@ -223,5 +241,37 @@
 
 	.white--text svg {
 		fill: white;
+	}
+
+	.marker {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		height: 24px;
+		width: 24px;
+		position: relative;
+		left: 8px;
+		top: 8px;
+	}
+
+	.marker-dot {
+		height: 8px;
+		width: 8px;
+		background: var(--v-primary-base);
+		border-radius: 50%;
+	}
+
+	.marker:focus {
+		outline: none;
+	}
+
+	.marker:hover .marker-dot {
+		transform: scale(1.5);
+		transform-origin: center;
+	}
+
+	.marker:focus .marker-dot {
+		transform: scale(2);
+		transform-origin: center;
 	}
 </style>

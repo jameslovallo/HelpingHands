@@ -11,6 +11,7 @@
 		"airtable": "0.8.1",
 		"gridsome": "^0.7.13",
 		"vue-the-mask": "^0.11.1",
+		"vue2-gmap-custom-marker": "^5.5.10",
 		"vue2-google-maps": "0.10.7",
 		"vuetify": "2.2.17"
 	},

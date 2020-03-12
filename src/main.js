@@ -15,8 +15,7 @@ export default function(
 	Vue.component('Layout', DefaultLayout)
 	Vue.use(VueGoogleMaps, {
 		load: {
-			key: 'AIzaSyAHeFzImxoXokNH2UAXc6lbJPW4qJGTTls',
-			libraries: 'places'
+			key: 'AIzaSyAHeFzImxoXokNH2UAXc6lbJPW4qJGTTls'
 		}
 	})
 	Vue.use(Vuetify)
