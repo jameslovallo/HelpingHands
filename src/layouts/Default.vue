@@ -8,7 +8,7 @@
 			<v-btn to="/" text>Home</v-btn>
 			<v-btn to="/app/" text>App</v-btn>
 			<v-btn to="/about/" text>About</v-btn>
-			<v-spacer class="xs-only" />
+			<v-spacer class="hidden-sm-and-up" />
 		</v-app-bar>
 
 		<v-content>
