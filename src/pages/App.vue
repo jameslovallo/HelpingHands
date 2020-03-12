@@ -8,16 +8,21 @@
 			<GmapMarker
 				v-for="(hood, n) in hoods"
 				:key="n"
-				:position="getPoint(hood)"
+				:position="hood.point"
 				:clickable="true"
 				:draggable="true"
-				@click="
-					(selectedNeighborhood = hood[10]), (selectedBurrough = hood[16])
-				"
+				@click="setHood(hood)"
 			/>
 		</GmapMap>
-		<div style="margin-top: -36px; margin: -24px auto 0; text-align: center;">
-			<v-btn-toggle rounded mandatory v-model="userType" class="elevation-3">
+
+		<div class="toggle">
+			<v-btn-toggle
+				rounded
+				mandatory
+				v-model="userType"
+				class="elevation-3"
+				v-if="!submitted"
+			>
 				<v-btn
 					value="need_help"
 					active-class="accent darken-1 white--text font-weight-bold"
@@ -38,11 +43,18 @@
 				</v-btn>
 			</v-btn-toggle>
 		</div>
-		<v-container style="min-width: 300px; max-width: 600px;" class="mb-12">
-			<div class="title mb-4 mt-6 text-center">
+
+		<v-container
+			v-if="!submitted"
+			style="min-width: 300px; max-width: 600px;"
+			class="mb-12 mt-2"
+		>
+			<div class="title mb-4 text-center">
 				<span v-if="selectedNeighborhood">
-					Your Location: {{ selectedNeighborhood }},
-					{{ selectedBurrough }}
+					Your Location:
+					<span class="primary--text">
+						{{ selectedNeighborhood }}, {{ selectedBurrough }}
+					</span>
 				</span>
 				<span v-else>Select your neighborhood on the map.</span>
 			</div>
@@ -95,14 +107,26 @@
 					</v-card-text>
 				</v-card>
 				<v-btn
+					:disabled="!valid || selectedNeighborhood.length === 0"
 					@click="submit"
 					rounded
-					:disabled="!valid || selectedNeighborhood.length === 0"
 					color="accent"
+					large
 				>
 					<v-icon left>{{ icons.mdiSend }}</v-icon> Submit
 				</v-btn>
 			</v-form>
+		</v-container>
+
+		<v-container v-if="submitted" class="d-flex justify-center mb-12 mt-6">
+			<v-card shaped outlined style="min-width: 300px; max-width: 600px;">
+				<v-img src="/message_sent.svg" contain class="ma-4" />
+				<v-divider />
+				<v-card-text>
+					<p class="title">Thanks, we added you to our database!</p>
+					We'll let you know as soon as you have a match.
+				</v-card-text>
+			</v-card>
 		</v-container>
 	</Layout>
 </template>
@@ -140,14 +164,9 @@
 			}
 		}),
 		methods: {
-			getPoint(hood) {
-				let point = hood[8]
-					.replace("POINT (", "")
-					.replace(")", "")
-					.split(" ");
-				let lat = Number(point[1]);
-				let lng = Number(point[0]);
-				return { lat: lat, lng: lng };
+			setHood(hood) {
+				this.selectedNeighborhood = hood.neighborhood;
+				this.selectedBurrough = hood.burrough;
 			},
 			submit() {
 				var Airtable = require("airtable");
@@ -181,6 +200,8 @@
 						});
 					}
 				);
+
+				this.submitted = true;
 			}
 		}
 	};
@@ -192,6 +213,13 @@
 		width: 100%;
 		max-height: 50vh;
 		border-bottom: 1px solid #ccc;
+	}
+
+	.toggle {
+		position: relative;
+		top: -24px;
+		margin: 0 auto;
+		text-align: center;
 	}
 
 	.white--text svg {

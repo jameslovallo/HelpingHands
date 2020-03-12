@@ -8,7 +8,7 @@
 				But New Yorkers look out for each other.<br />We want to connect those
 				who can help with those who need it.
 			</p>
-			<v-btn rounded bordered color="accent" to="/app/">Get Started</v-btn>
+			<v-btn large rounded color="accent" to="/app/">Get Started</v-btn>
 			<v-img
 				src="spread_love.svg"
 				contain

@@ -35,8 +35,7 @@ export default function(
 				light: {
 					primary: '#3f51b5',
 					secondary: '#b0bec5',
-					accent: '#512da8',
-					error: '#b71c1c'
+					accent: '#512da8'
 				}
 			}
 		}

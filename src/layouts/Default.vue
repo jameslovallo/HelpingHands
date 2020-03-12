@@ -1,7 +1,6 @@
 <template>
 	<v-app>
 		<v-app-bar app dense color="primary" dark>
-			<v-app-bar-nav-icon @click="drawer = !drawer" />
 			<v-toolbar-title class="hidden-xs-only"
 				>Helping Hands, NYC</v-toolbar-title
 			>
@@ -35,12 +34,12 @@
 
 	h1,
 	.h1 {
-		font-size: calc(48px + (60 - 48) * ((100vw - 400px) / (1800 - 400)));
+		font-size: calc(36px + (60 - 36) * ((100vw - 400px) / (1800 - 400)));
 	}
 
 	h2,
 	.h2 {
-		font-size: calc(48px + (60 - 48) * ((100vw - 400px) / (1800 - 400)));
+		font-size: calc(24px + (36 - 24) * ((100vw - 400px) / (1800 - 400)));
 	}
 
 	h3,
