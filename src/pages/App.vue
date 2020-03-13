@@ -189,7 +189,6 @@
 				clickableIcons: false,
 				maxZoom: 14,
 				minZoom: 11,
-				gestureHandling: "greedy",
 				styles: mapStyles
 			}
 		}),
@@ -260,12 +259,10 @@
 	.marker {
 		display: flex;
 		align-items: center;
-		justify-content: flex-start;
+		justify-content: center;
 		height: 24px;
 		width: 24px;
-		position: relative;
-		left: 8px;
-		top: 8px;
+		border-radius: 50%;
 	}
 
 	.marker-dot {
